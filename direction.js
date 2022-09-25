@@ -7,6 +7,18 @@ function TwoDIndexToOneDIndex(index) {
 }
 
 
+function checkType(source, des) {
+    if (des == ' ') {
+        return 0;
+    }
+    regexp = /^[A-Z]/
+    if ((regexp.test(source) && regexp.test(des)) || (!regexp.test(source) && !regexp.test(des))) {
+        return 1;
+    }
+    return 2;
+}
+
+
 function checkRock(source, des) {
     if (source[0] == des[0] && source[1] == des[1]) {
         return false;
@@ -28,12 +40,18 @@ function checkPawn(source, des, type) {
         return false;
     }
     if (type === true) {
+        if (checkType(gameBoard[source[0]][source[1]], gameBoard[des[0]][des[1]]) == 2) {
+            return ((des[0] - source[0]) == 1 && (des[1] - source[1] == 1 || des[1] - source[1] == -1));
+        }
         return ((source[0] == des[0] - 1 && source[1] == des[1]) ||
             (source[0] == des[0] - 2 && source[1] == des[1] && source[0] == 1));
-    }
-
-    return ((source[0] == des[0] + 1 && source[1] == des[1]) ||
-        (source[0] == des[0] + 2 && source[1] == des[1] && source[0] == 6));
+    } else {
+        if (checkType(gameBoard[source[0]][source[1]], gameBoard[des[0]][des[1]]) == 2) {
+            return ((des[0] - source[0]) == -1 && (des[1] - source[1] == 1 || des[1] - source[1] == -1));
+        }
+        return ((source[0] == des[0] + 1 && source[1] == des[1]) ||
+            (source[0] == des[0] + 2 && source[1] == des[1] && source[0] == 6))
+    };
 }
 
 

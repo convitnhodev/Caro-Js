@@ -54,7 +54,8 @@ function gameMove() {
                     gameBox.forEach((box, i) => {
                         const des = OneDIndexToTwoDIndex(i);
                         if (checkRock(index, des)) {
-                            box.classList.add('highlight');
+                            if (checkType(gameBoard[index[0]][index[1]], gameBoard[des[0]][des[1]]) != 1)
+                                box.classList.add('highlight');
                         }
                     });
                     isSelected = true;
@@ -73,9 +74,11 @@ function gameMove() {
                     gameBox.forEach((box, i) => {
                         const des = OneDIndexToTwoDIndex(i);
                         if (checkKnight(index, des)) {
-                            box.classList.add('highlight');
-
+                            if (checkType(gameBoard[index[0]][index[1]], gameBoard[des[0]][des[1]]) != 1)
+                                box.classList.add('highlight');
                         }
+
+
                     });
                     isSelected = true;
                     selectedChessIndex = index;
@@ -92,7 +95,9 @@ function gameMove() {
                     gameBox.forEach((box, i) => {
                         const des = OneDIndexToTwoDIndex(i);
                         if (checkBishop(index, des)) {
-                            box.classList.add('highlight');
+
+                            if (checkType(gameBoard[index[0]][index[1]], gameBoard[des[0]][des[1]]) != 1)
+                                box.classList.add('highlight');
                         }
                     });
                     isSelected = true;
@@ -110,7 +115,8 @@ function gameMove() {
                     gameBox.forEach((box, i) => {
                         const des = OneDIndexToTwoDIndex(i);
                         if (checkQueen(index, des)) {
-                            box.classList.add('highlight');
+                            if (checkType(gameBoard[index[0]][index[1]], gameBoard[des[0]][des[1]]) != 1)
+                                box.classList.add('highlight');
 
                         }
                     });
@@ -132,7 +138,8 @@ function gameMove() {
                     gameBox.forEach((box, i) => {
                         const des = OneDIndexToTwoDIndex(i);
                         if (checkKing(index, des)) {
-                            box.classList.add('highlight');
+                            if (checkType(gameBoard[index[0]][index[1]], gameBoard[des[0]][des[1]]) != 1)
+                                box.classList.add('highlight');
                         }
                     });
                     isSelected = true;
@@ -150,7 +157,8 @@ function gameMove() {
                     gameBox.forEach((box, i) => {
                         const des = OneDIndexToTwoDIndex(i);
                         if (checkPawn(index, des, true)) {
-                            box.classList.add('highlight');
+                            if (checkType(gameBoard[index[0]][index[1]], gameBoard[des[0]][des[1]]) != 1)
+                                box.classList.add('highlight');
 
                         }
                     });
@@ -176,7 +184,7 @@ function gameMove() {
                     isSelected = false;
 
                     turn = false;
-                    document.getElementById("turn").innerHTML = "Turn's White"
+                    document.getElementById("turn").innerHTML = "White's Turn"
                     document.getElementById("turn").style.color = "rgb(255, 204, 0)";
                 }
 
@@ -192,7 +200,8 @@ function gameMove() {
                     gameBox.forEach((box, i) => {
                         const des = OneDIndexToTwoDIndex(i);
                         if (checkRock(index, des)) {
-                            box.classList.add('highlight');
+                            if (checkType(gameBoard[index[0]][index[1]], gameBoard[des[0]][des[1]]) != 1)
+                                box.classList.add('highlight');
 
                         }
                     });
@@ -211,7 +220,8 @@ function gameMove() {
                     gameBox.forEach((box, i) => {
                         const des = OneDIndexToTwoDIndex(i);
                         if (checkKnight(index, des)) {
-                            box.classList.add('highlight');
+                            if (checkType(gameBoard[index[0]][index[1]], gameBoard[des[0]][des[1]]) != 1)
+                                box.classList.add('highlight');
 
                         }
                     });
@@ -230,7 +240,8 @@ function gameMove() {
                     gameBox.forEach((box, i) => {
                         const des = OneDIndexToTwoDIndex(i);
                         if (checkBishop(index, des)) {
-                            box.classList.add('highlight');
+                            if (checkType(gameBoard[index[0]][index[1]], gameBoard[des[0]][des[1]]) != 1)
+                                box.classList.add('highlight');
 
                         }
                     });
@@ -249,8 +260,8 @@ function gameMove() {
                     gameBox.forEach((box, i) => {
                         const des = OneDIndexToTwoDIndex(i);
                         if (checkQueen(index, des)) {
-                            box.classList.add('highlight');
-
+                            if (checkType(gameBoard[index[0]][index[1]], gameBoard[des[0]][des[1]]) != 1)
+                                box.classList.add('highlight');
                         }
                     });
                     isSelected = true;
@@ -268,7 +279,8 @@ function gameMove() {
                     gameBox.forEach((box, i) => {
                         const des = OneDIndexToTwoDIndex(i);
                         if (checkKing(index, des)) {
-                            box.classList.add('highlight');
+                            if (checkType(gameBoard[index[0]][index[1]], gameBoard[des[0]][des[1]]) != 1)
+                                box.classList.add('highlight');
                         }
                     });
                     isSelected = true;
@@ -286,7 +298,8 @@ function gameMove() {
                     gameBox.forEach((box, i) => {
                         const des = OneDIndexToTwoDIndex(i);
                         if (checkPawn(index, des, false)) {
-                            box.classList.add('highlight');
+                            if (checkType(gameBoard[index[0]][index[1]], gameBoard[des[0]][des[1]]) != 1)
+                                box.classList.add('highlight');
 
                         }
                     });
@@ -310,14 +323,13 @@ function gameMove() {
                     });
                     isSelected = false;
                     turn = true;
-                    document.getElementById("turn").innerHTML = "Turn's Black";
+                    document.getElementById("turn").innerHTML = "Black's Turn";
                     document.getElementById("turn").style.color = "rgb(0, 0, 153)";
                 }
-
                 break;
         }
     }
-    console.log(gameBoard)
+
     gameDraw();
 }
 
@@ -327,7 +339,8 @@ function gameDraw() {
     gameBoard.forEach((row, rowIndex) => {
         row.forEach((piece, pieceIndex) => {
             if (piece !== ' ') {
-                gameBox[rowIndex * 8 + pieceIndex].innerHTML = chessMap[piece][0];
+                gameBox[rowIndex * 8 + pieceIndex].innerHTML = chessMap[piece];
+                console.log(chessMap[piece]);
             } else {
                 gameBox[rowIndex * 8 + pieceIndex].innerHTML = '';
             }
